@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+
+{% block title %}Index{% endblock %}
+
+{% block header %} Index {% endblock %}
+
+{% block main %}
+    <p> Pet Adoption </p>
+
+    <ul>
+        {% for pet in pets %}
+            <li>
+                <a href='/{{ pet.id }}' >{{ pet.name }}</a>
+                <ul>
+                    {% if pet.photo_url %}
+                        <li>
+                            <img class='index-photo' src='{{ pet.photo_url }}' alt='pet photo' />
+                        </li>
+                    {% endif %}
+                    <li>
+                        {{ pet.species }}
+                    </li>
+                    {% if pet.age %}
+                        <li>
+                            Age: {{ pet.age }}
+                        </li>
+                    {% endif %}
+                    <li>
+                        {% if pet.available == True %}
+                            <strong>Available</strong>
+                        {% else %}
+                            Unavailable
+                        {% endif %}
+                    </li>
+                </ul>
+            </li>
+        {% endfor %}
+    </ul>
+
+    <a href='/add'>Add Pet</a>
+{% endblock %}
